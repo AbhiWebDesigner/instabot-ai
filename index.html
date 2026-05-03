@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>InstaBot AI — Instagram Automation for Creators</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --gold:#C9A84C;--gold-light:#E8C97A;--dark:#0A0A0A;
+  --dark-2:#111111;--dark-3:#1A1A1A;--text:#F5F5F0;--text-muted:#888880;
+}
+body{background:var(--dark);color:var(--text);font-family:'DM Sans',sans-serif}
+a{text-decoration:none;color:inherit}
+
+nav{display:flex;align-items:center;justify-content:space-between;padding:1.2rem 2rem;border-bottom:0.5px solid #2A2A2A;background:var(--dark);position:sticky;top:0;z-index:100}
+.logo{font-family:'Playfair Display',serif;font-size:20px;color:var(--gold)}
+.logo span{color:var(--text)}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{color:var(--text-muted);font-size:14px;transition:color 0.2s}
+.nav-links a:hover{color:var(--gold)}
+.nav-cta{background:var(--gold);color:var(--dark);padding:0.5rem 1.2rem;border-radius:4px;font-size:14px;font-weight:500;cursor:pointer;border:none;font-family:'DM Sans',sans-serif}
+.nav-cta:hover{background:var(--gold-light)}
+
+.hero{text-align:center;padding:5rem 2rem 4rem;background:var(--dark);position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-100px;left:50%;transform:translateX(-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(201,168,76,0.08) 0%,transparent 70%);pointer-events:none}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(201,168,76,0.1);border:0.5px solid rgba(201,168,76,0.3);color:var(--gold);font-size:12px;letter-spacing:1px;padding:0.3rem 1rem;border-radius:20px;margin-bottom:1.5rem;text-transform:uppercase}
+.hero h1{font-family:'Playfair Display',serif;font-size:52px;font-weight:700;line-height:1.1;margin-bottom:1.2rem;background:linear-gradient(135deg,#F5F5F0 0%,#C9A84C 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{font-size:17px;color:var(--text-muted);max-width:520px;margin:0 auto 2.5rem;line-height:1.7;font-weight:300}
+.hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.btn-primary{background:var(--gold);color:var(--dark);padding:0.8rem 2rem;border-radius:4px;font-size:15px;font-weight:500;cursor:pointer;border:none;font-family:'DM Sans',sans-serif;transition:all 0.2s}
+.btn-primary:hover{background:var(--gold-light);transform:translateY(-1px)}
+.btn-secondary{background:transparent;color:var(--text);padding:0.8rem 2rem;border-radius:4px;font-size:15px;cursor:pointer;border:0.5px solid #333;font-family:'DM Sans',sans-serif;transition:all 0.2s}
+.btn-secondary:hover{border-color:var(--gold);color:var(--gold)}
+
+.stats{display:flex;justify-content:center;gap:3rem;padding:2.5rem 2rem;border-top:0.5px solid #1A1A1A;border-bottom:0.5px solid #1A1A1A;background:var(--dark-2);flex-wrap:wrap}
+.stat{text-align:center}
+.stat-num{font-family:'Playfair Display',serif;font-size:32px;color:var(--gold)}
+.stat-label{font-size:13px;color:var(--text-muted);margin-top:2px}
+
+.section{padding:5rem 2rem}
+.section-title{text-align:center;margin-bottom:3rem}
+.section-title h2{font-family:'Playfair Display',serif;font-size:36px;margin-bottom:0.8rem}
+.section-title p{color:var(--text-muted);font-size:15px}
+
+.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;max-width:900px;margin:0 auto}
+.feature-card{background:var(--dark-3);border:0.5px solid #2A2A2A;border-radius:8px;padding:1.8rem;transition:border-color 0.2s}
+.feature-card:hover{border-color:rgba(201,168,76,0.4)}
+.feature-icon{width:44px;height:44px;background:rgba(201,168,76,0.1);border:0.5px solid rgba(201,168,76,0.2);border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:1.2rem;font-size:20px}
+.feature-card h3{font-size:16px;font-weight:500;margin-bottom:0.6rem}
+.feature-card p{font-size:14px;color:var(--text-muted);line-height:1.6}
+
+.steps{display:flex;flex-direction:column;gap:1rem;max-width:600px;margin:0 auto}
+.step{display:flex;gap:1.2rem;align-items:flex-start;padding:1.2rem;background:var(--dark-3);border:0.5px solid #2A2A2A;border-radius:8px}
+.step-num{width:32px;height:32px;border-radius:50%;background:rgba(201,168,76,0.15);border:0.5px solid rgba(201,168,76,0.3);color:var(--gold);font-size:13px;font-weight:500;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.step h4{font-size:15px;font-weight:500;margin-bottom:0.3rem}
+.step p{font-size:13px;color:var(--text-muted);line-height:1.5}
+
+.pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.5rem;max-width:820px;margin:0 auto}
+.pricing-card{background:var(--dark-3);border:0.5px solid #2A2A2A;border-radius:8px;padding:2rem;text-align:center;position:relative}
+.pricing-card.featured{border-color:rgba(201,168,76,0.5);background:#111108}
+.popular-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--dark);font-size:11px;font-weight:500;padding:3px 12px;border-radius:20px;text-transform:uppercase;white-space:nowrap}
+.plan-name{font-size:13px;color:var(--text-muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:1rem}
+.plan-price{font-family:'Playfair Display',serif;font-size:40px;color:var(--gold)}
+.plan-price span{font-size:16px;color:var(--text-muted);font-family:'DM Sans',sans-serif}
+.plan-features{list-style:none;margin:1.5rem 0;text-align:left}
+.plan-features li{font-size:13px;color:var(--text-muted);padding:0.4rem 0;border-bottom:0.5px solid #222;display:flex;gap:8px;align-items:center}
+.plan-features li::before{content:'✓';color:var(--gold);font-size:12px;flex-shrink:0}
+.plan-btn{width:100%;padding:0.7rem;border-radius:4px;font-size:14px;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:500;transition:all 0.2s}
+.btn-outline{background:transparent;border:0.5px solid #444;color:var(--text)}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold)}
+.btn-gold{background:var(--gold);border:none;color:var(--dark)}
+.btn-gold:hover{background:var(--gold-light)}
+
+.cta-section{padding:5rem 2rem;text-align:center;background:var(--dark-2);border-top:0.5px solid #1A1A1A}
+.cta-section h2{font-family:'Playfair Display',serif;font-size:36px;margin-bottom:1rem}
+.cta-section p{color:var(--text-muted);font-size:15px;margin-bottom:2rem}
+
+footer{padding:2rem;text-align:center;border-top:0.5px solid #1A1A1A;background:var(--dark)}
+footer p{font-size:13px;color:var(--text-muted);margin-top:0.5rem}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">InstaBot <span>AI</span></div>
+  <ul class="nav-links">
+    <li><a href="#features">Features</a></li>
+    <li><a href="#how">How it works</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+  </ul>
+  <button class="nav-cta">Get started</button>
+</nav>
+
+<section class="hero">
+  <div class="hero-badge">AI powered instagram automation</div>
+  <h1>Grow smarter.<br>Engage better.</h1>
+  <p>InstaBot AI automatically replies to comments, deletes toxic content in 100+ languages, and sends DMs with your links — all on autopilot.</p>
+  <div class="hero-btns">
+    <button class="btn-primary">Connect Instagram</button>
+    <button class="btn-secondary">See demo</button>
+  </div>
+</section>
+
+<div class="stats">
+  <div class="stat"><div class="stat-num">100+</div><div class="stat-label">Languages worldwide</div></div>
+  <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Automated replies</div></div>
+  <div class="stat"><div class="stat-num">40s</div><div class="stat-label">Smart reply delay</div></div>
+  <div class="stat"><div class="stat-num">0</div><div class="stat-label">Ban risk (Official API)</div></div>
+</div>
+
+<section class="section" id="features" style="background:var(--dark)">
+  <div class="section-title">
+    <h2>Everything you need</h2>
+    <p>Powerful automation tools built for creators worldwide</p>
+  </div>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">💬</div>
+      <h3>AI comment replies</h3>
+      <p>Smart, context-aware replies in your style. Matches the commenter's language automatically.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🗑️</div>
+      <h3>Toxic comment deletion</h3>
+      <p>AI detects and deletes abusive content in 100+ languages including all Indian regional languages.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📩</div>
+      <h3>Automatic DMs</h3>
+      <p>Send your links, offers, or content automatically via DM when viewers comment on your reels.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">⚡</div>
+      <h3>Smart rate limiting</h3>
+      <p>Max 3 replies per user with 40 second delays. Feels human, stays safe from spam detection.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🔒</div>
+      <h3>Official Instagram API</h3>
+      <p>100% safe. Uses Meta's official API with proper permissions. Zero ban risk for your account.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🎯</div>
+      <h3>Creator dashboard</h3>
+      <p>Add your custom links, set your reply style, and monitor engagement — all in one place.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="how" style="background:var(--dark-2)">
+  <div class="section-title">
+    <h2>How it works</h2>
+    <p>Set up in minutes, runs forever</p>
+  </div>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div>
+        <h4>Connect your Instagram</h4>
+        <p>Login with your Instagram Business or Creator account. No technical knowledge needed.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div>
+        <h4>Add your links and style</h4>
+        <p>Add your Telegram, YouTube, or any links. Describe your reply style in simple words.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div>
+        <h4>Bot runs automatically</h4>
+        <p>AI replies to comments, deletes toxic content, and sends DMs — 24/7 without you.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="pricing" style="background:var(--dark)">
+  <div class="section-title">
+    <h2>Simple pricing</h2>
+    <p>Start free, scale as you grow</p>
+  </div>
+  <div class="pricing-grid">
+    <div class="pricing-card">
+      <div class="plan-name">Starter</div>
+      <div class="plan-price">₹499<span>/mo</span></div>
+      <ul class="plan-features">
+        <li>AI comment replies</li>
+        <li>Toxic comment deletion</li>
+        <li>1 Instagram account</li>
+        <li>Up to 1000 comments/mo</li>
+      </ul>
+      <button class="plan-btn btn-outline">Get started</button>
+    </div>
+    <div class="pricing-card featured">
+      <div class="popular-badge">Most popular</div>
+      <div class="plan-name">Pro</div>
+      <div class="plan-price">₹999<span>/mo</span></div>
+      <ul class="plan-features">
+        <li>Everything in Starter</li>
+        <li>Automatic DM links</li>
+        <li>3 Instagram accounts</li>
+        <li>Unlimited comments</li>
+        <li>Priority support</li>
+      </ul>
+      <button class="plan-btn btn-gold">Get started</button>
+    </div>
+    <div class="pricing-card">
+      <div class="plan-name">Agency</div>
+      <div class="plan-price">₹2499<span>/mo</span></div>
+      <ul class="plan-features">
+        <li>Everything in Pro</li>
+        <li>Unlimited accounts</li>
+        <li>Custom reply styles</li>
+        <li>Analytics dashboard</li>
+        <li>White label option</li>
+      </ul>
+      <button class="plan-btn btn-outline">Contact us</button>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <h2>Ready to automate?</h2>
+  <p>Join creators who are saving hours every day with InstaBot AI</p>
+  <button class="btn-primary">Start free trial</button>
+</section>
+
+<footer>
+  <div class="logo">InstaBot <span style="color:var(--text-muted)">AI</span></div>
+  <p>Built for creators worldwide. Powered by AI. © 2026 InstaBot AI</p>
+</footer>
+
+</body>
+</html>
